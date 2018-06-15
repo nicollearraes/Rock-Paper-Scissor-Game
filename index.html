@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Rock, Paper, Scissor Game</title>
+</head>
+<body>
+  <script type="text/javascript">
+
+  function computerPlay() {
+    var x = ["rock", "scissor", "paper"];
+    return x[Math.floor(Math.random() * 3)];
+  };
+
+
+  var pscore = 0, cscore = 0, tscore = 0, round = 0;
+
+
+  function playRound (playerSelection, computerSelection) {
+    playerSelection = playerSelection.toLowerCase();
+    round++;
+    console.log("round " + round);
+    if (playerSelection === computerSelection) {
+      tscore++
+      return "It's a tie, both players picked " + playerSelection + "!"
+    }
+    else if ((playerSelection === "rock" && computerSelection === "scissor") || (playerSelection === "scissor" && computerSelection === "paper") || (playerSelection === "paper" && computerSelection === "rock")) {
+      pscore++
+      return "Congratulations, you win! " + playerSelection + " beats " + computerSelection + "!"
+    }
+    else {
+      cscore++
+      return "Sorry, you lose! " + computerSelection + " beats " + playerSelection + "."
+    }
+  };
+
+
+  function game() {
+    console.log(round);
+    while (round < 5) {
+      var computerSelection = computerPlay();
+      var playerSelection = undefined; //setting playerSelection to undefined makes it ask again for a value until it gets something that is valid
+
+      var options = ["rock", "paper", "scissor"];
+      while(!options.includes(playerSelection)) {
+        playerSelection = window.prompt("Please choose between rock, scissor and paper")
+        playerSelection = playerSelection.toLowerCase()
+        if (!options.includes(playerSelection)) {
+          console.log("Option not valid, please choose between rock, scissor and paper")
+        }
+      }
+
+      var result = playRound(playerSelection, computerSelection);
+      console.log(result);
+      console.log("player score: " + pscore + " | computer score: " + cscore + " | tie score: " + tscore);
+    };
+
+  if (pscore > cscore) {
+    return "You won the game!"
+  }
+  else if (cscore > pscore) {
+    return "The computer won the game."
+  }
+  else {
+    return "The game was a tie!"
+  };
+
+  };
+
+  </script>
+</body>
+</html>
