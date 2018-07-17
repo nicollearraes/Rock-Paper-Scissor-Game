@@ -13,26 +13,32 @@
     var x = ["rock", "scissor", "paper"];
     return x[Math.floor(Math.random() * 3)];
   };
+  //randomly chooses the computer option
 
 
   var pscore = 0, cscore = 0, tscore = 0, round = 0;
 
 
   function playRound (playerSelection, computerSelection) {
+    //plays one round of the game
     playerSelection = playerSelection.toLowerCase();
     round++;
     console.log("round " + round);
     if (playerSelection === computerSelection) {
-      tscore++
+      tscore++ //increments tie score
       return "It's a tie, both players picked " + playerSelection + "!"
     }
-    else if ((playerSelection === "rock" && computerSelection === "scissor") || (playerSelection === "scissor" && computerSelection === "paper") || (playerSelection === "paper" && computerSelection === "rock")) {
-      pscore++
-      return "Congratulations, you win! " + playerSelection + " beats " + computerSelection + "!"
+    else if ((playerSelection === "rock" && computerSelection === "scissor") ||
+      (playerSelection === "scissor" && computerSelection === "paper") ||
+        (playerSelection === "paper" && computerSelection === "rock")) {
+      pscore++ //increments player score
+      return "Congratulations, you win! " + playerSelection + " beats " +
+        computerSelection + "!"
     }
     else {
-      cscore++
-      return "Sorry, you lose! " + computerSelection + " beats " + playerSelection + "."
+      cscore++ //increments computer score
+      return "Sorry, you lose! " + computerSelection + " beats " +
+        playerSelection + "."
     }
   };
 
@@ -41,10 +47,13 @@
     console.log(round);
     while (round < 5) {
       var computerSelection = computerPlay();
-      var playerSelection = undefined; //setting playerSelection to undefined makes it ask again for a value until it gets something that is valid
+      var playerSelection = undefined; //setting playerSelection to undefined
+        //makes it ask again for a value until it gets something that is valid
 
       var options = ["rock", "paper", "scissor"];
-      while(!options.includes(playerSelection)) {
+      while(!options.includes(playerSelection)) { //if you dont chose an option
+          //that is in the array options, it'll ask you again until you give
+          //a valid option 
         playerSelection = window.prompt("Please choose between rock, scissor and paper")
         playerSelection = playerSelection.toLowerCase()
         if (!options.includes(playerSelection)) {
@@ -54,7 +63,8 @@
 
       var result = playRound(playerSelection, computerSelection);
       console.log(result);
-      console.log("player score: " + pscore + " | computer score: " + cscore + " | tie score: " + tscore);
+      console.log("player score: " + pscore + " | computer score: " + cscore +
+        " | tie score: " + tscore);
     };
 
   if (pscore > cscore) {
